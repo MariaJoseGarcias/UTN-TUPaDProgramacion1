@@ -129,53 +129,58 @@
 
 #EJercicio 5 
 
-#lista_estudiantes = [
-#    "Ana", "Beto", "Carla", "David", 
-#    "Elena", "Felipe", "Gaby", "Hugo"
-#]
+#estudiantes = ["Ana", "Pablo", "Aime", "David","Juan", "Diana", "Gaby", "Hugo"]
 
-#def mostrar_lista(lista):
-#    if not lista:
-#        print("(La lista de estudiantes está vacía.)")
-#        return
-        
-#    for i in range(len(lista)):
-#        print(f"  {i + 1}. {lista[i]}")
+#print("Listado de Estudiantes")
+#for i in range(len(estudiantes)):
+#    print(f"{i + 1}. {estudiantes[i]}")
 
+#print("\nDesea agregar o quitar algun estudiante?")
+#opcion = input("Ingrese A o E: ").upper().strip()
 
-#print("Listado de Estudiantes Inicial")
-#mostrar_lista(lista_estudiantes)
-
-#print("\nModificación de la Lista")
-#opcion = input("¿Desea (A)gregar un estudiante o (E)liminar uno existente? (A/E): ").upper().strip()
-
-#if opcion == 'A':
-#    nuevo_nombre = input("Ingrese el nombre del nuevo estudiante: ").strip().capitalize()
-#    if nuevo_nombre:
-#        lista_estudiantes.append(nuevo_nombre)
-#        print(f"{nuevo_nombre} ha sido agregado a la lista")
+#if opcion == "A":
+#    nuevo_estudiante = input("Ingrese el nombre del nuevo estudiante: ").capitalize().strip()
+#    if nuevo_estudiante != "":
+#        estudiantes.append(nuevo_estudiante)
+#        print(f"\n{nuevo_estudiante} fue agregado a la lista.")
 #    else:
-#        print("Operación cancelada: El nombre no puede estar vacío.")
+#        print("No se ingreso un nombre válido. Operación cancelada.")
 
-#elif opcion == 'E':
-
-#    print("\nLista actual para eliminar:")
-#    mostrar_lista(lista_estudiantes)
+#elif opcion == "E":
+#    print("Lista actual para eliminar:")
+#    for i in range(len(estudiantes)):
+#        print(f"{i + 1}. {estudiantes[i]}")
     
-#    nombre_a_eliminar = input("Ingrese el nombre EXACTO del estudiante a eliminar: ").strip().capitalize()
-    
+#    nombre_eliminar = input("Ingrese el nombre del estudiante a eliminar: ").capitalize().strip()
 
-#    try:
-#        lista_estudiantes.remove(nombre_a_eliminar)
-#        print(f"{nombre_a_eliminar} ha sido eliminado de la lista")
-#    except ValueError:
-#        print(f"Error: '{nombre_a_eliminar}' no se encontró en la lista. La lista no se modificó.")
+#    if nombre_eliminar in estudiantes:
+#        estudiantes.remove(nombre_eliminar)
+#        print(f"{nombre_eliminar} fue eliminado de la lista.")
+#    else:
+#        print(f"El nombre '{nombre_eliminar}' no fue encontrado. La lista no se modifico")
 
 #else:
+#    print("Opcion no valida")
 
-#    print("Opción no reconocida. La lista no ha sido modificada.")
-##print("\nLista Final Actualizada")
-#mostrar_lista(lista_estudiantes)
+#print("Lista final actualizada: ")
+#for estudiante in estudiantes:
+#    print(f"- {estudiante}")
+
+#Ejercicio 6
+
+#numeros = []
+#for i in range(7):
+#    valor = int(input(f"Ingrese el numero #{i + 1}: "))
+#    numeros.append(valor)
+
+#print("Lista original: ", numeros)
+
+#ultimo = numeros[-1]
+#numeros.pop()
+#numeros.insert(0, ultimo)
+
+#print("Lista rotada: ", numeros)
+
 
 #Ejercicio 7 
 
@@ -276,82 +281,99 @@
 #    ["-", "-", "-"]
 #]
 
-#jugador_actual = "X"
-#juego_activo = True
-#jugadas_totales = 0
-
 #def mostrar_tablero():
-#    print("\n  1 2 3 (Columna)")
-#    print("")
+#    print("\n  1 2 3 (Columnas)")
 #    for i in range(3):
-#        print(f"{i + 1}|", end="") 
-
+#        print(f"{i + 1}|", end=" ")
 #        for j in range(3):
-#            print(f"{tablero[i][j]} ", end="")
+#            print(tablero[i][j], end=" ")
 #        print()
 #    print()
 
+#def hay_ganador(simbolo):
 
-#def solicitar_jugada():
-#    global jugador_actual, jugadas_totales, juego_activo
+#    for i in range(3):
+#        if tablero[i][0] == simbolo and tablero[i][1] == simbolo and tablero[i][2] == simbolo:
+#            return True
 
-#    while True:
-#        try:
+#    for j in range(3):
+#        if tablero[0][j] == simbolo and tablero[1][j] == simbolo and tablero[2][j] == simbolo:
+#            return True
 
-#            entrada_fila = input(f"Jugador {jugador_actual}, ingrese la FILA (1-3): ")
-#            fila = int(entrada_fila) 
-            
-#            entrada_columna = input(f"Jugador {jugador_actual}, ingrese la COLUMNA (1-3): ")
-#            columna = int(entrada_columna)
-            
-#            if fila in range(3) and columna in range(3):
-                
-#                if tablero[fila][columna] == "-":
-#                    tablero[fila][columna] = jugador_actual
-#                    jugadas_totales += 1
-#                    break
-#                else:
-#                    print("Esa casilla ya está ocupada Intente de nuevo.")
-#            else:
-#                print("Posición fuera de rango Las coordenadas deben ser entre 1 y 3.")
-                
-#        except ValueError:
-#            print(" Entrada no válida. Debe ingresar números enteros.")
+#    if tablero[0][0] == simbolo and tablero[1][1] == simbolo and tablero[2][2] == simbolo:
+#        return True
 
-#while juego_activo and jugadas_totales < 9:
-    
+#    if tablero[0][2] == simbolo and tablero[1][1] == simbolo and tablero[2][0] == simbolo:
+#        return True
+
+#    return False
+
+
+#jugador = "X"
+#jugadas_realizadas = 0
+#ganador = None
+
+#print("TaTeTi-Jugador X vs O")
+
+#while jugadas_realizadas < 9 and ganador is None:
 #    mostrar_tablero()
-#    solicitar_jugada()
-    
-#    if jugador_actual == "X":
-#        jugador_actual = "O"
+#    print(f"Turno del jugador {jugador}")
+
+#    fila = int(input("Ingrese la FILA (1-3): "))
+#    columna = int(input("Ingrese la COLUMNA (1-3): "))
+
+#    if fila < 1 or fila > 3 or columna < 1 or columna > 3:
+#        print("Posición fuera de rango. Debe estar entre 1 y 3.")
+#        continue
+
+#    fila_idx = fila - 1
+#    columna_idx = columna - 1
+
+#    if tablero[fila_idx][columna_idx] != "-":
+#        print("Casilla ocupada. Intente otra posición.")
+#        continue
+
+#    tablero[fila_idx][columna_idx] = jugador
+#    jugadas_realizadas += 1
+
+#    if hay_ganador(jugador):
+#        ganador = jugador
+#        break
+
+#    if jugador == "X":
+#        jugador = "O"
 #    else:
-#        jugador_actual = "X"
+#        jugador = "X"
 
 #mostrar_tablero()
-#print(f"Total de jugadas realizadas: {jugadas_totales}")
+
+#if ganador is not None:
+#    print(f"Ganador el jugador {ganador}")
+#else:
+#    print("Empate. No hay ganador.")
 
 #Ejercicio 10 
 
 #ventas_semana = [
-#    [10, 15, 8, 20, 12, 5, 25], 
-#    [5, 12, 20, 15, 10, 30, 18], 
-#    [22, 10, 5, 18, 25, 15, 12], 
-#    [11, 25, 15, 10, 8, 20, 16]  
+#    [10, 15, 8, 20, 12, 5, 25],
+#    [5, 12, 20, 15, 10, 30, 18],
+#    [22, 10, 5, 18, 25, 15, 12],
+#    [11, 25, 15, 10, 8, 20, 16]
 #]
 
+#NOMBRES_PRODUCTOS = ["Lapiz", "Cartuchera", "Cartulina", "Trincheta"]
 #NOMBRES_DIAS = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
 
-#num_productos = len(ventas_semana) 
-#num_dias = len(ventas_semana[0]) 
+#num_productos = len(ventas_semana)
+#num_dias = len(ventas_semana[0])
 
-#total_por_producto = [0] * num_productos 
-#total_por_dia = [0] * num_dias           
+#total_por_producto = [0] * num_productos
+#total_por_dia = [0] * num_dias
 
-#max_venta_producto = -1  
+#max_venta_producto = -1
 #nombre_producto_mas_vendido = ""
 
-#max_venta_dia = -1 
+#max_venta_dia = -1
 #nombre_dia_mas_vendido = ""
 
 #for i in range(num_productos):
@@ -359,30 +381,31 @@
 #        venta = ventas_semana[i][j]
 
 #        total_por_producto[i] += venta
-        
+
 #        total_por_dia[j] += venta
 
-#print("1. Total Vendido por Producto")
+#print("1. Total vendido por producto")
 #for i in range(num_productos):
 #    producto_actual = NOMBRES_PRODUCTOS[i]
 #    total = total_por_producto[i]
-    
-#    print(f"{producto_actual}: {total} unidades vendidas.")
+
+#    print(f"{producto_actual}: {total} unidades vendidas")
+
 #    if total > max_venta_producto:
 #        max_venta_producto = total
 #        nombre_producto_mas_vendido = producto_actual
 
-#print("\n2. Día con Mayores Ventas Totales")
+#print("2. Total vendido por día y día con mayores ventas")
 #for j in range(num_dias):
 #    dia_actual = NOMBRES_DIAS[j]
 #    total = total_por_dia[j]
 
-#    print(f"Total {dia_actual}: {total}")
+#    print(f"Total {dia_actual}: {total} unidades")
 
 #    if total > max_venta_dia:
 #        max_venta_dia = total
 #        nombre_dia_mas_vendido = dia_actual
 
-#print("\nConclusiones")
-#print(f"El producto más vendido en la semana fue: {nombre_producto_mas_vendido} (con {max_venta_producto} unidades).")
-#print(f"El día con mayores ventas totales fue: {nombre_dia_mas_vendido} (con {max_venta_dia} unidades totales).")
+#print("3. Conclusiones")
+#print(f"- El producto más vendido en la semana fue: {nombre_producto_mas_vendido} (con {max_venta_producto} unidades).")
+#print(f"- El día con mayores ventas totales fue: {nombre_dia_mas_vendido} (con {max_venta_dia} unidades).")
